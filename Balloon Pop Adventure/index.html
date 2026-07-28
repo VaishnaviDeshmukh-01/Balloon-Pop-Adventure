@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balloon Pop Adventure</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <header class="game-header">
+        <h1 class="game-title">🎈 Balloon Pop Adventure</h1>
+      </header>
+
+      <main class="game-main">
+        <section class="energy-wrapper" aria-label="Energy Bar">
+          <div class="energy-bar">
+            <div class="energy-fill"></div>
+          </div>
+        </section>
+        <section class="game-board">
+          <div class="score-box">Points: <span class="score">0</span></div>
+          <div id="balloon-container"></div>
+          <div class="danger-line"></div>
+        </section>
+        <section class="game-controls">
+          <button id="start-btn">Start Game</button>
+        </section>
+      </main>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
