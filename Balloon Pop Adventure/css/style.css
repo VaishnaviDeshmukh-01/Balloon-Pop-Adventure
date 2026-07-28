@@ -1,0 +1,215 @@
+/* =============== RESET =============== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#87CEEB;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+/* =============== GAME CONTAINER =============== */
+
+.game-container{
+    width:min(95%,800px);
+    padding:20px;
+}
+
+/* =============== HEADER =============== */
+
+.game-header{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.game-title{
+    color:#fff;
+    font-size:2.5rem;
+    text-shadow:2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* =============== ENERGY BAR =============== */
+
+.energy-wrapper{
+    margin-bottom: 18px;
+}
+
+.energy-bar{
+    width:100%;
+    height:24px;
+    background:#ddd;
+    border-radius:40px;
+    overflow:hidden;
+}
+
+.energy-fill{
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #4CAF50,
+        #8BC34A
+    );
+    transition: 0.35s;
+}
+
+/* =============== GAME BOARD =============== */
+
+.game-board{
+    position:relative;
+    width:100%;
+    height: 420px;
+    background:white;   
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+/* Score */
+
+.score-box{
+    position:absolute;
+
+    top: 20px;
+    
+    right:20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background:#fff;
+
+    padding:12px 22px;
+
+    font-size: 1.2rem;
+
+    border-radius:50px;
+
+    font-weight: 700;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+
+    z-index: 100;
+
+    transition: transform 0.2s;
+}
+
+.score-box.pop{
+    transform: scale(1.15);
+}
+
+/* Balloon Area */
+
+#balloon-container{
+    position:absolute;
+    inset:0;
+}
+
+.balloon{
+    position:absolute;
+    width:70px;
+    bottom:0;
+}
+
+.danger-line{
+
+    position:absolute;
+
+    bottom:320px;
+
+    left:0;
+
+    width:100%;
+
+    border-top:4px dashed red;
+
+    opacity:.55;
+
+    z-index:5;
+}
+
+/* =============== CONTROLS =============== */
+
+.game-controls{
+    text-align:center;
+    margin-top:15px;
+}
+
+#start-btn{
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#ff4d6d;
+
+    color:white;
+
+    font-size:1rem;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+#start-btn:hover{
+
+    background:#ff2d55;
+
+    transform:scale(1.05);
+}
+
+#start-btn:active{
+
+    transform:scale(.95);
+}
+
+
+
+/* =============== RESPONSIVE =============== */
+
+@media (max-width:900px){
+
+    .game-board{
+
+        height:650px;
+
+    }
+
+}   
+
+@media(max-width:768px){
+
+    .game-title{
+        font-size:2rem;
+    }
+
+    #start-btn{
+        width:100%;
+    }
+
+}
+
+@media (max-width:600px){
+
+    .game-board{
+
+        height: 550px;
+
+    }
+
+}
