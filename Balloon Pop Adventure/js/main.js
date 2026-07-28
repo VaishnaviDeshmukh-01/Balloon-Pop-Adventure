@@ -49,7 +49,7 @@ const startBtn = document.getElementById("start-btn");
 
 
 startBtn.addEventListener("click", () => {
-    setInterval(createBalloon, 3000)
+    setInterval(createBalloon, 1000)
 })
 
 
