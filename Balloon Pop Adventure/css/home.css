@@ -1,0 +1,540 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
+
+  background: linear-gradient(180deg, #56d8ff, #9ee8ff 45%, #dff8ff);
+}
+
+/* ================= MAIN ================= */
+
+.home-container {
+  height: 100vh;
+
+  display: flex;
+  height: 100dvh;
+
+  justify-content: center;
+
+  align-items: center;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+/* ================= CLOUDS ================= */
+
+.cloud {
+  position: absolute;
+
+  background: white;
+
+  width: 180px;
+  height: 60px;
+
+  border-radius: 50px;
+
+  opacity: 0.8;
+
+  filter: blur(0.3px);
+
+  animation: cloudMove 25s linear infinite;
+}
+
+.cloud:before,
+.cloud:after {
+  content: "";
+
+  position: absolute;
+
+  background: white;
+
+  border-radius: 50%;
+}
+
+.cloud:before {
+  width: 90px;
+  height: 90px;
+
+  top: -45px;
+  left: 30px;
+}
+
+.cloud:after {
+  width: 70px;
+  height: 70px;
+
+  top: -25px;
+  right: 25px;
+}
+
+.cloud1 {
+  top: 15%;
+  left: -200px;
+}
+
+.cloud2 {
+  top: 35%;
+  left: -300px;
+
+  animation-delay: 10s;
+}
+
+@keyframes cloudMove {
+  from {
+    transform: translateX(-200px);
+  }
+
+  to {
+    transform: translateX(120vw);
+  }
+}
+
+/* ================= LOGO AREA ================= */
+
+.logo-area {
+  width: min(90vw, 500px);
+
+  text-align: center;
+
+  z-index: 10;
+}
+
+.game-logo {
+  width: min(65vw, 430px);
+
+  min-height: 35vh;
+
+  object-fit: contain;
+
+  filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.2));
+
+  animation: logoBounce 2s infinite;
+}
+
+@keyframes logoBounce {
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+.tagline {
+  margin-top: 2vh;
+
+  font-size: clamp(14px, 2vw, 22px);
+
+  font-weight: bold;
+
+  color: black;
+}
+
+/* ================= PLAY BUTTON ================= */
+
+.play-btn {
+  margin-top: 3vh;
+
+  padding: clamp(12px, 2vw, 22px) clamp(35px, 6vw, 70px);
+
+  font-size: clamp(18px, 3vw, 32px);
+
+  font-weight: 900;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 70px;
+
+  cursor: pointer;
+
+  background: linear-gradient(180deg, #ffdd55, #ff9d00);
+
+  box-shadow:
+    0 10px 0 #e67e00,
+    0 20px 40px rgba(0, 0, 0, 0.25);
+
+  position: relative;
+
+  overflow: hidden;
+
+  animation: buttonPulse 1.5s infinite;
+}
+
+.play-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -100%;
+
+  width: 50%;
+
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  to {
+    left: 150%;
+  }
+}
+
+.play-btn:hover {
+  transform: scale(1.1);
+}
+
+@keyframes buttonPulse {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* ================= MASCOTS ================= */
+
+.mascot {
+  position: absolute;
+
+  width: min(18vw, 220px);
+
+  max-height: 40vh;
+
+  object-fit: contain;
+
+  z-index: 5;
+
+  filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+
+  animation: mascotFloat 3s ease-in-out infinite;
+}
+
+.left {
+  left: 4%;
+
+  bottom: 12%;
+}
+
+.right {
+  right: 3%;
+
+  bottom: 10%;
+
+  width: min(28vw, 360px);
+
+  animation-delay: 1s;
+}
+
+@keyframes mascotFloat {
+  50% {
+    transform: translateY(-25px) rotate(3deg);
+  }
+}
+
+/* ================= BALLOONS ================= */
+
+.balloon {
+  position: absolute;
+
+  width: clamp(45px, 7vw, 90px);
+
+  height: auto;
+
+  bottom: -150px;
+
+  user-select: none;
+
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.2));
+
+  animation: balloonFly 10s infinite ease-in;
+}
+
+/* Different positions */
+
+.b1 {
+  left: 8%;
+
+  animation-duration: 12s;
+}
+
+.b2 {
+  left: 30%;
+
+  width: 75px;
+
+  animation-delay: 3s;
+
+  animation-duration: 10s;
+}
+
+.b3 {
+  right: 30%;
+
+  width: 100px;
+
+  animation-delay: 5s;
+
+  animation-duration: 14s;
+}
+
+.b4 {
+  right: 10%;
+
+  width: 70px;
+
+  animation-delay: 7s;
+
+  animation-duration: 11s;
+}
+
+@keyframes balloonFly {
+  0% {
+    transform: translateY(0) rotate(0deg);
+
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(-55vh) rotate(10deg);
+  }
+
+  100% {
+    transform: translateY(-120vh) rotate(-15deg);
+
+    opacity: 0;
+  }
+}
+
+.balloon:nth-child(1) {
+  left: 10%;
+}
+
+.balloon:nth-child(2) {
+  left: 30%;
+
+  animation-delay: 3s;
+}
+
+.balloon:nth-child(3) {
+  right: 25%;
+
+  animation-delay: 6s;
+}
+
+.balloon:nth-child(4) {
+  right: 10%;
+
+  animation-delay: 8s;
+}
+
+@keyframes balloonUp {
+  0% {
+    transform: translateY(0) rotate(0);
+  }
+
+  100% {
+    transform: translateY(-120vh) rotate(20deg);
+  }
+}
+
+/* ================= SPARKLES ================= */
+
+.sparkle {
+  position: absolute;
+
+  color: white;
+
+  font-size: 30px;
+
+  animation: sparkle 2s infinite;
+}
+
+.s1 {
+  top: 20%;
+  left: 20%;
+}
+
+.s2 {
+  top: 60%;
+  right: 20%;
+}
+
+.s3 {
+  top: 30%;
+  right: 35%;
+}
+
+@keyframes sparkle {
+  50% {
+    opacity: 0.3;
+
+    transform: scale(1.5);
+  }
+}
+
+/* ================= GROUND ================= */
+
+.grass {
+  position: absolute;
+
+  bottom: 0;
+
+  width: 100%;
+
+  height:clamp(35px,8vh,70px);
+
+  background: #75d64b;
+
+  border-radius: 50% 50% 0 0;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .mascot {
+    width: 110px;
+  }
+
+  .game-logo {
+    width: 280px;
+  }
+
+  .tagline {
+    font-size: 16px;
+  }
+
+  .play-btn {
+    font-size: 22px;
+
+    padding: 18px 45px;
+  }
+}
+
+/* Small Phones */
+
+@media(max-width:480px){
+
+
+.game-logo{
+
+width:75vw;
+
+max-height:28vh;
+
+}
+
+
+.mascot.left{
+
+width:90px;
+
+bottom:7%;
+
+}
+
+
+.mascot.right{
+
+width:150px;
+
+bottom:6%;
+
+}
+
+
+.tagline{
+
+font-size:14px;
+
+}
+
+
+.play-btn{
+
+padding:14px 35px;
+
+font-size:20px;
+
+}
+
+
+
+}
+
+
+
+/* Tablets */
+
+@media(min-width:481px) and (max-width:900px){
+
+
+.game-logo{
+
+width:60vw;
+
+}
+
+
+.mascot.right{
+
+width:250px;
+
+}
+
+
+.mascot.left{
+
+width:150px;
+
+}
+
+
+}
+
+
+
+
+/* Large screens */
+
+@media(min-width:1400px){
+
+
+.game-logo{
+
+width:500px;
+
+}
+
+
+.mascot.right{
+
+width:420px;
+
+}
+
+
+}

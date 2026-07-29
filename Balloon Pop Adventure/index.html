@@ -3,32 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Balloon Pop Adventure</title>
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <div class="game-container">
-      <header class="game-header">
-        <h1 class="game-title">🎈 Balloon Pop Adventure</h1>
-      </header>
 
-      <main class="game-main">
-        <section class="energy-wrapper" aria-label="Energy Bar">
-          <div class="energy-bar">
-            <div class="energy-fill"></div>
-          </div>
-        </section>
-        <section class="game-board">
-          <div class="score-box">Points: <span class="score">0</span></div>
-          <div id="balloon-container"></div>
-          <div class="danger-line"></div>
-        </section>
-        <section class="game-controls">
-          <button id="start-btn">Start Game</button>
-        </section>
-      </main>
+    <title>Balloon Pop Adventure</title>
+
+    <link rel="stylesheet" href="css/home.css" />
+  </head>
+
+  <body>
+    <div class="home-container">
+      <div class="cloud cloud1"></div>
+
+      <div class="cloud cloud2"></div>
+
+      <div class="sparkle s1">✨</div>
+      <div class="sparkle s2">✨</div>
+      <div class="sparkle s3">⭐</div>
+
+      <img src="assets/mascot-left.PNG" class="mascot left" />
+
+      <img
+        src="assets/mascot-right.png"
+        class="mascot right"
+      />
+
+      <div class="logo-area">
+        <img
+          src="assets/game-logo.png"
+          class="game-logo"
+        />
+
+        <p class="tagline">🎈 Pop Balloons • Earn Points • Have Fun! 🎈</p>
+
+        <button class="play-btn" onclick="startGame()">▶ PLAY NOW</button>
+      </div>
+
+      <div class="balloons">
+        <img src="assets/red-balloon.png" class="balloon b1" />
+
+        <img src="assets/blue-balloon.png" class="balloon b2" />
+
+        <img src="assets/yellow-balloon.png" class="balloon b3" />
+
+        <img src="assets/green-balloon.png" class="balloon b4" />
+      </div>
+
+      <div class="grass"></div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script>
+      function startGame() {
+        window.location.href = "game.html";
+      }
+    </script>
   </body>
 </html>

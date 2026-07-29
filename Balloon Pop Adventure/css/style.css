@@ -1,215 +1,399 @@
 /* =============== RESET =============== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body{
     font-family:Arial, Helvetica, sans-serif;
-    background:#87CEEB;
+
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #67d8ff 0%,
+            #87e1ff 20%,
+            #bceeff 60%,
+            #eafcff 100%
+        );
+
+
     display:flex;
     justify-content:center;
-    align-items:center;
-    min-height:100vh;
+
+    align-items:flex-start;
+
+    padding:20px;
+
+    overflow-x:hidden;
+}
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        radial-gradient(circle at 15% 15%, white 0 55px, transparent 60px),
+        radial-gradient(circle at 80% 12%, white 0 45px, transparent 50px),
+        radial-gradient(circle at 60% 28%, white 0 70px, transparent 75px),
+        radial-gradient(circle at 35% 5%, white 0 40px, transparent 45px);
+
+    opacity:.55;
+
+    pointer-events:none;
+
+    z-index:-1;
+
 }
 
 /* =============== GAME CONTAINER =============== */
 
 .game-container{
-    width:min(95%,800px);
-    padding:20px;
+    width:min(96%,1000px);
+    padding:8px;
 }
 
 /* =============== HEADER =============== */
+/* .game-header{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:8px;
+
+    margin:0 0 6px 0;
+    padding:0;
+}
+
+
+.game-header::before{
+    left:-70px;
+    top:-70px;
+}
+
+.game-header::after{
+    right:-60px;
+    bottom:-80px;
+}
+
+/* Center */
+
+/* .header-center{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+    text-align:center;
+    position:relative;
+    z-index:5;
+} */
+
+/* Cloud behind logo */
+/* .cloud{
+    background:none;
+    padding:0;
+    box-shadow:none;
+}
+
+.cloud::before,
+.cloud::after{
+    display:none;
+}
+
+.game-logo{
+    width: clamp(150px, 18vw, 220px);
+    display:block; 
+} 
+
+/* Subtitle */
+
+/* .game-subtitle{
+
+    margin-top:18px;
+
+    font-size:1rem;
+
+    color:white;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    text-shadow:2px 2px 8px rgba(0,0,0,.3);
+} */
+
+/* Mascots */
+
+/* .left-mascot,
+.right-mascot{
+    position:relative;
+    z-index:5;
+}
+
+.left-mascot img,
+.right-mascot img{
+    width: clamp(55px, 6vw, 80px);
+    height: auto;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+.right-mascot img{
+    animation-delay:1.5s;
+} */
+
+/* Floating */
+
+/* @keyframes float{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+} */
+
+/* Mobile */
+/* @media (max-width:768px){
 
 .game-header{
-    text-align:center;
-    margin-bottom:20px;
+    grid-template-columns:55px 1fr 55px;
+    gap:8px;
+    margin-bottom:8px;
 }
 
-.game-title{
-    color:#fff;
-    font-size:2.5rem;
-    text-shadow:2px 2px 5px rgba(0,0,0,0.2);
+.game-logo{
+    width:170px;
 }
 
+.left-mascot img,
+.right-mascot img{
+    width:55px;
+}
+
+} */
 /* =============== ENERGY BAR =============== */
 
-.energy-wrapper{
-    margin-bottom: 18px;
+.energy-wrapper {
+  margin-bottom: 18px;
 }
 
-.energy-bar{
-    width:100%;
-    height:24px;
-    background:#ddd;
-    border-radius:40px;
-    overflow:hidden;
+.energy-bar {
+  width: 100%;
+  height: clamp(18px, 2vw, 26px);
+  background: #ddd;
+  border-radius: 40px;
+  overflow: hidden;
 }
 
-.energy-fill{
-    width:100%;
-    height:100%;
-    background:linear-gradient(
-        90deg,
-        #4CAF50,
-        #8BC34A
-    );
-    transition: 0.35s;
+.energy-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  transition: 0.35s;
 }
 
 /* =============== GAME BOARD =============== */
 
-.game-board{
-    position:relative;
-    width:100%;
-    height: 420px;
-    background:white;   
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
+.game-board {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height:min(65vh, 600px);
+    min-height: 490px;
+
+  background:#ffffff;
+   border:5px solid white;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
 }
 
 /* Score */
 
-.score-box{
-    position:absolute;
+.score-box {
+  position: absolute;
 
-    top: 20px;
-    
-    right:20px;
+  top: clamp(10px, 2vw, 20px);
 
-    display: flex;
+  right: clamp(10px, 2vw, 20px);
 
-    align-items: center;
+  display: flex;
 
-    gap: 10px;
+  align-items: center;
 
-    background:#fff;
+  gap: 8px;
 
-    padding:12px 22px;
+  background: #fff;
 
-    font-size: 1.2rem;
+  padding: clamp(8px, 1vw, 14px) clamp(14px, 2vw, 22px);
 
-    border-radius:50px;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
 
-    font-weight: 700;
+  border-radius: 50px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.15);
+  font-weight: 700;
 
-    z-index: 100;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 
-    transition: transform 0.2s;
+  z-index: 100;
+
+  flex-wrap: wrap;
+
+  white-space: nowrap;
+
+  transition: transform 0.2s;
 }
 
-.score-box.pop{
-    transform: scale(1.15);
+.score-box.pop {
+  transform: scale(1.15);
 }
 
 /* Balloon Area */
 
-#balloon-container{
-    position:absolute;
-    inset:0;
+#balloon-container {
+  position: absolute;
+  inset: 0;
 }
 
-.balloon{
-    position:absolute;
-    width:70px;
-    bottom:0;
+.balloon {
+  position: absolute;
+  width: clamp(45px, 7vw, 80px);
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: auto;
+  bottom: 0;
+  -webkit-user-drag:none;
+  transition:
+        transform 0.15s ease,
+        opacity 0.2s ease;
 }
 
-.danger-line{
+.balloon.pop {
+  transform: scale(1.3);
 
-    position:absolute;
+  opacity: 0;
 
-    bottom:320px;
+  transition: 0.2s;
+}
 
-    left:0;
+.danger-line {
+  position: absolute;
 
-    width:100%;
+  top: 25%;
 
-    border-top:4px dashed red;
+  left: 0;
 
-    opacity:.55;
+  width: 100%;
 
-    z-index:5;
+  border-top: 4px dashed red;
+
+  opacity: 0.55;
+
+  z-index: 5;
+}
+
+.game-over {
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  color: white;
+
+  z-index: 200;
+
+  text-align: center;
+
+  padding:30px;
+}
+
+.game-over h2 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+.game-over p {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+
+  margin: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+#start-btn,
+#restart-btn {
+  padding: clamp(12px, 2vw, 16px) clamp(24px, 5vw, 40px);
+
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+
+  border-radius: 50px;
+  min-height: 48px;
+}
+
+#restart-btn {
+  border: none;
+
+  background: #ff4d6d;
+
+  color: white;
+
+  font-weight: bold;
+
+  cursor: pointer;
 }
 
 /* =============== CONTROLS =============== */
 
-.game-controls{
-    text-align:center;
-    margin-top:15px;
+.game-controls {
+  text-align: center;
+  margin-top: 20px;
 }
 
-#start-btn{
+#start-btn {
+  border: none;
 
-    padding:15px 35px;
+  background: #ff4d6d;
 
-    border:none;
+  color: white;
 
-    border-radius:50px;
+  font-weight: bold;
 
-    background:#ff4d6d;
+  cursor: pointer;
 
-    color:white;
-
-    font-size:1rem;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.3s;
+  transition: 0.3s;
 }
 
-#start-btn:hover{
+#start-btn:hover {
+  background: #ff2d55;
 
-    background:#ff2d55;
-
-    transform:scale(1.05);
+  transform: scale(1.05);
 }
 
-#start-btn:active{
-
-    transform:scale(.95);
+#start-btn:active {
+  transform: scale(0.95);
 }
 
-
-
-/* =============== RESPONSIVE =============== */
-
-@media (max-width:900px){
-
-    .game-board{
-
-        height:650px;
-
-    }
-
-}   
-
-@media(max-width:768px){
-
-    .game-title{
-        font-size:2rem;
-    }
-
-    #start-btn{
-        width:100%;
-    }
-
-}
-
-@media (max-width:600px){
-
-    .game-board{
-
-        height: 550px;
-
-    }
-
-}

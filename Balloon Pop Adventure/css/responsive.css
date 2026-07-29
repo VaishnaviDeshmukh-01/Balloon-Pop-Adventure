@@ -1,0 +1,29 @@
+
+/* =============== RESPONSIVE =============== */
+
+@media (max-width: 768px) {
+  .game-container {
+    width: 95%;
+  }
+
+  .game-board {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-board {
+    min-height: 420px;
+  }
+
+  .score-box {
+    left: 10px;
+    right: 10px;
+
+    justify-content: center;
+  }
+
+  #start-btn {
+    width: 100%;
+  }
+}
