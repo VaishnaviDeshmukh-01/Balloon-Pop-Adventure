@@ -7,9 +7,236 @@
     <title>Balloon Pop Adventure</title>
 
     <link rel="stylesheet" href="css/home.css" />
+
+    <style>
+      /*==========================
+    LOADING SCREEN
+==========================*/
+
+#loading-screen{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        to bottom,
+        #7ED6FF 0%,
+        #A9E4FF 45%,
+        #EAFBFF 100%
+    );
+
+    z-index:99999;
+    transition:opacity .8s ease;
+}
+
+.loading-overlay{
+    width:100%;
+    min-height:420px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:50px 20px;
+
+    background:#fff;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+}
+
+.logo-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.loading-logo{
+    width:min(380px,80vw);
+
+    animation:bounce 2s infinite;
+
+    filter:drop-shadow(0 8px 15px rgba(0,0,0,.25));
+}
+
+.loading-title{
+    margin-top:20px;
+
+    font-size:clamp(1.5rem,3vw,2rem);
+
+    font-weight:800;
+
+    color:#222;
+
+    text-align:center;
+}
+
+.loading-text{
+    margin-top:15px;
+
+    font-size:clamp(1rem,2vw,1.2rem);
+
+    letter-spacing:2px;
+
+    color:#444;
+}
+
+.loading-bar{
+    width:min(420px,90vw);
+
+    height:18px;
+
+    margin-top:25px;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    background:#e6e6e6;
+}
+
+.loading-progress{
+    width:0;
+    height:100%;
+    border-radius:50px;
+    transition:width .2s linear;
+
+    background:linear-gradient(
+        90deg,
+        #FF8C00,
+        #FFD000
+    );
+}
+
+#loading-percent{
+    margin-top:18px;
+
+    font-size:clamp(1rem,2vw,1.2rem);
+
+    font-weight:bold;
+
+    color:#333;
+}
+
+/* Animation */
+
+@keyframes bounce{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.04);
+    }
+}
+
+
+@media (max-width:768px){
+
+    .loading-overlay{
+        min-height:360px;
+        padding:40px 20px;
+    }
+
+    .loading-logo{
+        width:300px;
+    }
+
+    .loading-title{
+        margin-top:16px;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .loading-overlay{
+        min-height:320px;
+        padding:30px 16px;
+    }
+
+    .loading-logo{
+        width:220px;
+    }
+
+    .loading-title{
+        font-size:1.35rem;
+    }
+
+    .loading-text{
+        font-size:.95rem;
+        letter-spacing:1px;
+    }
+
+    .loading-bar{
+        height:14px;
+    }
+
+    #loading-percent{
+        font-size:1rem;
+    }
+
+}
+
+@media (max-width:360px){
+
+    .loading-overlay{
+        min-height:290px;
+        padding:25px 12px;
+    }
+
+    .loading-logo{
+        width:180px;
+    }
+
+    .loading-title{
+        font-size:1.15rem;
+    }
+
+}
+    </style>
   </head>
 
   <body>
+
+    <!-- ================= LOADING SCREEN ================= -->
+
+<div id="loading-screen">
+
+
+    <div class="loading-overlay">
+
+        <div class="logo-wrapper">
+    <img src="assets/company-logo.png" class="loading-logo">
+</div>
+
+        <h2 class="loading-title">
+            Balloon Pop Adventure
+        </h2>
+
+        <p class="loading-text">
+            Loading...
+        </p>
+
+        <div class="loading-bar">
+
+            <div
+                class="loading-progress"
+                id="loading-progress">
+            </div>
+
+        </div>
+
+        <span id="loading-percent">
+            0%
+        </span>
+
+    </div>
+
+</div>
     <div class="home-container">
       <div class="cloud cloud1"></div>
 
@@ -52,8 +279,39 @@
 
     <script>
       function startGame() {
-        window.location.href = "game.html";
-      }
+    window.location.href = "game.html";
+}
+
+window.addEventListener("load", () => {
+
+    const loading = document.getElementById("loading-screen");
+    const progress = document.getElementById("loading-progress");
+    const percent = document.getElementById("loading-percent");
+
+    let value = 0;
+
+    const interval = setInterval(() => {
+
+        value++;
+
+        progress.style.width = value + "%";
+        percent.textContent = value + "%";
+
+        if (value >= 100) {
+
+            clearInterval(interval);
+
+            loading.style.opacity = "0";
+
+            setTimeout(() => {
+                loading.style.display = "none";
+            }, 800);
+
+        }
+
+    }, 20);
+
+});
     </script>
   </body>
 </html>
