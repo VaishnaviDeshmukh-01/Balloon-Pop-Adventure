@@ -5,7 +5,7 @@ const balloonImages = [
   "assets/yellow-balloon.png",
 ];
 
-const balloonSpeed = 2;
+const balloonSpeed = window.innerWidth <= 768 ? 4 : 2;
 let score = 0;
 let energy = 100;
 
