@@ -11,12 +11,251 @@ body {
   overflow: hidden;
 }
 
+
+
 body {
   font-family: "Comic Sans MS", "Trebuchet MS", sans-serif;
 
   background: linear-gradient(180deg, #56d8ff, #9ee8ff 45%, #dff8ff);
 }
 
+
+/*==========================
+    LOADING SCREEN
+==========================*/
+
+      #loading-screen {
+        position: fixed;
+        inset: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: linear-gradient(
+          to bottom,
+          #7ed6ff 0%,
+          #a9e4ff 45%,
+          #eafbff 100%
+        );
+
+        z-index: 99999;
+        transition: opacity 0.8s ease;
+      }
+
+      .loading-overlay {
+        width: 100%;
+        min-height: 420px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        padding: 50px 20px;
+
+        background: #fff;
+
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .logo-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loading-logo {
+        width: min(380px, 80vw);
+
+        animation: bounce 2s infinite;
+
+        filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.25));
+      }
+
+      .loading-title {
+        margin-top: 20px;
+
+        font-size: clamp(1.5rem, 3vw, 2rem);
+
+        font-weight: 800;
+
+        color: #222;
+
+        text-align: center;
+      }
+
+      .loading-text {
+        margin-top: 15px;
+
+        font-size: clamp(1rem, 2vw, 1.2rem);
+
+        letter-spacing: 2px;
+
+        color: #444;
+      }
+
+      .loading-bar {
+        width: min(420px, 90vw);
+
+        height: 18px;
+
+        margin-top: 25px;
+
+        border-radius: 50px;
+
+        overflow: hidden;
+
+        background: #e6e6e6;
+      }
+
+      .loading-progress {
+        width: 0;
+        height: 100%;
+        border-radius: 50px;
+        transition: width 0.2s linear;
+
+        background: linear-gradient(90deg, #ff8c00, #ffd000);
+      }
+
+      #loading-percent {
+        margin-top: 18px;
+
+        font-size: clamp(1rem, 2vw, 1.2rem);
+
+        font-weight: bold;
+
+        color: #333;
+      }
+
+      /* Animation */
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.04);
+        }
+      }
+
+      /* ==========================
+   FOOTER
+========================== */
+
+      .game-footer {
+        position: fixed;
+        left: 50%;
+        bottom: 12px;
+        transform: translateX(-50%);
+
+        width: min(95%, 700px);
+
+        padding: 10px 18px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+
+        border-radius: 18px;
+
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(12px);
+
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+        text-align: center;
+
+        z-index: 100;
+      }
+
+      .game-footer p {
+        margin: 0;
+        font-size: clamp(0.85rem, 1.5vw, 1rem);
+        font-weight: 700;
+      }
+
+      .game-footer small {
+        font-size: clamp(0.65rem, 1.2vw, 0.82rem);
+        color: #666;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 768px) {
+        .game-footer {
+          font-size: 12px;
+          padding: 6px 14px;
+          bottom: 8px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .loading-overlay {
+          min-height: 360px;
+          padding: 40px 20px;
+        }
+
+        .loading-logo {
+          width: 300px;
+        }
+
+        .loading-title {
+          margin-top: 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .loading-overlay {
+          min-height: 320px;
+          padding: 30px 16px;
+        }
+
+        .loading-logo {
+          width: 220px;
+        }
+
+        .loading-title {
+          font-size: 1.35rem;
+        }
+
+        .loading-text {
+          font-size: 0.95rem;
+          letter-spacing: 1px;
+        }
+
+        .loading-bar {
+          height: 14px;
+        }
+
+        #loading-percent {
+          font-size: 1rem;
+        }
+
+        .game-footer {
+          bottom: 8px;
+          padding: 8px 12px;
+          border-radius: 14px;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .loading-overlay {
+          min-height: 290px;
+          padding: 25px 12px;
+        }
+
+        .loading-logo {
+          width: 180px;
+        }
+
+        .loading-title {
+          font-size: 1.15rem;
+        }
+      }
 /* ================= MAIN ================= */
 
 .home-container {
