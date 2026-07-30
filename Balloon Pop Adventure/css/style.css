@@ -242,7 +242,35 @@ body::before{
 
   cursor: pointer;
 }
+.game-over-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+}
 
+#home-btn {
+  padding: clamp(12px, 2vw, 16px) clamp(24px, 5vw, 40px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  border-radius: 50px;
+  min-height: 48px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#home-btn:hover {
+  background: #43a047;
+  transform: scale(1.05);
+}
+
+#home-btn:active {
+  transform: scale(0.95);
+}
 /* =============== CONTROLS =============== */
 
 .game-controls {

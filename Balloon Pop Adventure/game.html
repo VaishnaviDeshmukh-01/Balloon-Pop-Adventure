@@ -399,6 +399,36 @@
     transform: scale(0.95);
   }
 
+  .game-over-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#home-btn {
+  padding: clamp(12px, 2vw, 16px) clamp(24px, 5vw, 40px);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  border-radius: 50px;
+  min-height: 48px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#home-btn:hover {
+  background: #43a047;
+  transform: scale(1.05);
+}
+
+#home-btn:active {
+  transform: scale(0.95);
+}
+
   /* ========== RESPONSIVE BREAKPOINTS ========== */
 
   /* Very small phones */
@@ -501,18 +531,41 @@
     <div id="balloon-container" class="balloon-container"></div>
 
     <section class="game-over hidden">
-      <h2>Game Over</h2>
-      <p>Score: <span class="final-score">0</span></p>
-      <button id="restart-btn">Play Again</button>
-    </section>
+  <h2>Game Over</h2>
+
+  <p>
+    Score:
+    <span class="final-score">0</span>
+  </p>
+
+  <div class="game-over-buttons">
+    <button id="restart-btn">Play Again</button>
+    <button id="home-btn">🏠 Return Home</button>
+  </div>
+</section>
 
   </div>
 
+  <audio id="pop-sound" preload="auto">
+  <source src="assets/audio/sound-effects/pop.mp3" type="audio/mpeg" />
+</audio>
+<audio id="game-over-sound" preload="auto">
+  <source src="assets/audio/sound-effects/game-over.mp3" type="audio/mpeg" />
+</audio>
+<audio id="click-sound" preload="auto">
+  <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg" />
+</audio>
+<!-- Optional background music for the game -->
+<audio id="bg-music" loop preload="auto">
+  <source src="assets/audio/home-music.mp3" type="audio/mpeg" />
+</audio>
+
   <script src="js/config.js" defer></script>
-  <script src="js/ui.js" defer></script>
-  <script src="js/balloon.js" defer></script>
-  <script src="js/game.js" defer></script>
-  <script src="js/main.js" defer></script>
+<script src="js/sound.js" defer></script>   <!-- ← THIS WAS MISSING -->
+<script src="js/ui.js" defer></script>
+<script src="js/balloon.js" defer></script>
+<script src="js/game.js" defer></script>
+<script src="js/main.js" defer></script>
 
 </body>
 </html>

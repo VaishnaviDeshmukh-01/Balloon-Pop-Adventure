@@ -2,10 +2,23 @@ function startGame() {
   if (gameRunning) return;
 
   gameRunning = true;
-  gamePaused = false;
-
-  if (spawnInterval) clearInterval(spawnInterval);
+  startGameMusic();                    // ← add this
   spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
+}
+
+function resetGame() {
+  clearInterval(spawnInterval);
+
+  score = 0;
+  energy = MAX_ENERGY;
+
+  updateScore();
+  updateEnergy();
+
+  balloonContainer.innerHTML = "";
+  gameOverScreen.classList.add("hidden");
+
+  startGame();   // this will also restart music
 }
 
 function pauseGame() {
@@ -25,29 +38,3 @@ function pauseGame() {
   }
 }
 
-function resetGame() {
-  if (spawnInterval) {
-    clearInterval(spawnInterval);
-    spawnInterval = null;
-  }
-
-  score = 0;
-  energy = MAX_ENERGY;
-  gameRunning = false;
-  gamePaused = false;
-
-  updateScore();
-  updateEnergy();
-
-  if (balloonContainer) {
-    balloonContainer.innerHTML = "";
-  }
-
-  if (gameOverScreen) {
-    gameOverScreen.classList.add("hidden");
-  }
-
-  if (pauseBtn) pauseBtn.title = "Pause";
-
-  startGame();
-}

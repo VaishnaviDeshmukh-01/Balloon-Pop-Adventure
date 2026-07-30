@@ -35,24 +35,16 @@ function updateEnergy() {
   }
 }
 
+
 function gameOver() {
   gameRunning = false;
-  gamePaused = false;
+  clearInterval(spawnInterval);
+  balloonContainer.innerHTML = "";
 
-  if (spawnInterval) {
-    clearInterval(spawnInterval);
-    spawnInterval = null;
-  }
+  finalScore.textContent = score;
+  gameOverScreen.classList.remove("hidden");
 
-  if (balloonContainer) {
-    balloonContainer.innerHTML = "";
-  }
-
-  if (finalScore) {
-    finalScore.textContent = score;
-  }
-
-  if (gameOverScreen) {
-    gameOverScreen.classList.remove("hidden");
-  }
+  // Sound
+  stopGameMusic();
+  playSound(document.getElementById("game-over-sound"));
 }

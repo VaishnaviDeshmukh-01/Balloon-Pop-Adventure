@@ -1,29 +1,33 @@
-// Pause button
-if (pauseBtn) {
-  pauseBtn.addEventListener("click", () => {
-    pauseGame();
-  });
-}
+// Auto-start the game when the page loads
+window.addEventListener("DOMContentLoaded", () => {
+  updateScore();
+  updateEnergy();
+  startGame();
+});
 
-// Restart / Play Again
+// Play Again button
 if (restartBtn) {
   restartBtn.addEventListener("click", () => {
+    playSound(document.getElementById("click-sound"));
     resetGame();
   });
 }
 
-// Optional: + button (refill a bit of energy for now)
-if (plusBtn) {
-  plusBtn.addEventListener("click", () => {
-    if (!gameRunning || energy >= MAX_ENERGY) return;
-    energy = Math.min(MAX_ENERGY, energy + 20);
-    updateEnergy();
+// Return Home button
+const homeBtn = document.getElementById("home-btn");
+if (homeBtn) {
+  homeBtn.addEventListener("click", () => {
+    playSound(document.getElementById("click-sound"));
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 150);
   });
 }
 
-// Initial UI
-updateScore();
-updateEnergy();
-
-// Auto-start when page loads
-startGame();
+// Pause / Resume button
+if (pauseBtn) {
+  pauseBtn.addEventListener("click", () => {
+    playSound(document.getElementById("click-sound"));
+    pauseGame();
+  });
+}

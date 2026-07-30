@@ -45,10 +45,13 @@ function createBalloon() {
   animate();
 
   balloon.addEventListener("click", () => {
+    // Block popping while paused
     if (!gameRunning || gamePaused) return;
 
-    score += POINTS_PER_POP;
+    score += 10;
     updateScore();
+
+    playSound(document.getElementById("pop-sound"));
 
     balloon.classList.add("pop");
     setTimeout(() => {
