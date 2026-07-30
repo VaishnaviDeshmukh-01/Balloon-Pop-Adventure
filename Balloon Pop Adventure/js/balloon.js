@@ -1,42 +1,41 @@
 function createBalloon() {
-  const balloon = document.createElement("img");
+  if (!gameRunning || gamePaused || !balloonContainer) return;
 
+  const balloon = document.createElement("img");
   const randomBalloon =
     balloonImages[Math.floor(Math.random() * balloonImages.length)];
 
   balloon.src = randomBalloon;
-
   balloon.classList.add("balloon");
+  balloon.draggable = false;
 
-  const balloonWidth = 80;
-  const maxX = gameBoard.clientWidth - balloonWidth;
-
+  const maxX = Math.max(0, gameBoard.clientWidth - BALLOON_WIDTH);
   const startX = Math.random() * maxX;
-  
-  balloon.style.left = `${startX}px`;
-  
+
+  balloon.style.left = startX + "px";
+
   let y = 0;
   balloon.style.bottom = y + "px";
 
   balloonContainer.appendChild(balloon);
 
-  
+  // Danger line is at top: 28% → balloon crosses when bottom reaches ~72% of height
+  const dangerPosition = gameBoard.clientHeight * 0.72;
+
   function animate() {
     if (!balloon.isConnected || !gameRunning) return;
+    if (gamePaused) {
+      requestAnimationFrame(animate);
+      return;
+    }
 
     y += balloonSpeed;
-
-    balloon.style.bottom = `${y}px`;
-
-    const dangerPosition = gameBoard.clientHeight * 0.75;
+    balloon.style.bottom = y + "px";
 
     if (y >= dangerPosition) {
       energy -= ENERGY_LOSS;
-
       updateEnergy();
-
       balloon.remove();
-
       return;
     }
 
@@ -46,12 +45,12 @@ function createBalloon() {
   animate();
 
   balloon.addEventListener("click", () => {
-    score += 10;
+    if (!gameRunning || gamePaused) return;
 
+    score += POINTS_PER_POP;
     updateScore();
 
     balloon.classList.add("pop");
-
     setTimeout(() => {
       balloon.remove();
     }, 200);

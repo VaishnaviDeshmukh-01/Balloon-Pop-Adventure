@@ -6,33 +6,27 @@ const balloonImages = [
 ];
 
 const balloonSpeed = window.innerWidth <= 768 ? 4 : 2;
+
 let score = 0;
 let energy = 100;
-
 let gameRunning = false;
-let spawnInterval;
+let gamePaused = false;
+let spawnInterval = null;
 
 const balloonContainer = document.getElementById("balloon-container");
-
-const gameBoard = document.querySelector(".game-board");
-
+const gameBoard = balloonContainer; // full-screen play area
 const dangerLine = document.querySelector(".danger-line");
-
 const gameOverScreen = document.querySelector(".game-over");
-
 const finalScore = document.querySelector(".final-score");
-
 const restartBtn = document.getElementById("restart-btn");
-
-const startBtn = document.getElementById("start-btn");
-
-let scoreElement = document.querySelector(".score");
-
-const scoreBox = document.querySelector(".score-box");
-
 const energyFill = document.querySelector(".energy-fill");
+const energyText = document.querySelector(".energy-text");
+const coinValue = document.querySelector(".coin-value");
+const pauseBtn = document.querySelector(".pause-btn");
+const plusBtn = document.querySelector(".plus-btn");
 
 const SPAWN_INTERVAL = 1000;
 const BALLOON_WIDTH = 80;
 const ENERGY_LOSS = 10;
 const MAX_ENERGY = 100;
+const POINTS_PER_POP = 10;

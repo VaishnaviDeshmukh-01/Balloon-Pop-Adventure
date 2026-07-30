@@ -2,31 +2,52 @@ function startGame() {
   if (gameRunning) return;
 
   gameRunning = true;
+  gamePaused = false;
 
+  if (spawnInterval) clearInterval(spawnInterval);
   spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
 }
 
+function pauseGame() {
+  if (!gameRunning) return;
+
+  gamePaused = !gamePaused;
+
+  if (gamePaused) {
+    if (spawnInterval) {
+      clearInterval(spawnInterval);
+      spawnInterval = null;
+    }
+    if (pauseBtn) pauseBtn.title = "Resume";
+  } else {
+    spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
+    if (pauseBtn) pauseBtn.title = "Pause";
+  }
+}
+
 function resetGame() {
-  clearInterval(spawnInterval);
+  if (spawnInterval) {
+    clearInterval(spawnInterval);
+    spawnInterval = null;
+  }
 
-  // Reset score
   score = 0;
-
-  // Reset energy
   energy = MAX_ENERGY;
+  gameRunning = false;
+  gamePaused = false;
 
-  // Update UI
   updateScore();
   updateEnergy();
 
-  // Remove old balloons
-  balloonContainer.innerHTML = "";
+  if (balloonContainer) {
+    balloonContainer.innerHTML = "";
+  }
 
-  // Hide game over screen
-  gameOverScreen.classList.add("hidden");
+  if (gameOverScreen) {
+    gameOverScreen.classList.add("hidden");
+  }
 
-  // Start fresh
+  if (pauseBtn) pauseBtn.title = "Pause";
+
   startGame();
 }
-
-

@@ -17,35 +17,16 @@
     <meta name="author" content="Foxzoid Studio" />
 
     <meta name="robots" content="index, follow" />
-    <link rel="icon" href="assets/favicon.png">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="icon" href="assets/favicon.png" />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <!-- <link rel="stylesheet" href="css/responsive.css" /> -->
   </head>
   <body>
-    <div class="game-container">
-      <!-- <header class="game-header">
 
-    <div class="left-mascot">
-        <img src="assets/mascot-left.PNG" alt="">
-    </div>
+    
+    <!-- <main class="game-container">
 
-    <div class="header-center">
-
-        <div class="cloud">
-            <img src="assets/game-logo.png"
-                alt="Balloon Pop Adventure"
-                class="game-logo">
-        </div>
-    </div>
-
-    <div class="right-mascot">
-        <img src="assets/mascot-right.png" alt="">
-    </div>
-
-</header> -->
-
-
-      <main class="game-main">
+      <section class="game-main">
         <section class="energy-wrapper" aria-label="Energy Bar">
           <div class="energy-bar">
             <div class="energy-fill"></div>
@@ -64,20 +45,42 @@
               <span class="final-score">0</span>
             </p>
 
-            <button id="restart-btn">Play Again</button>
+            <button id="restart-btn" aria-label="Restart Game">Play Again</button>
           </section>
         </section>
         <section class="game-controls">
-          <button id="start-btn">Start Game</button>
+          <button id="start-btn" aria-label="Start Game">Start Game</button>
         </section>
-      </main>
-    </div>
-    
+      </section>
+    </main> -->
 
+    <audio id="bg-music" loop>
+      <source src="assets/audio/home-music.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="pop-sound" preload="auto">
+      <source src="assets/audio/sound-effects/pop.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="bonus-sound" preload="auto">
+      <source src="assets/audio/sound-effects/bonus.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="game-over-sound" preload="auto">
+      <source
+        src="assets/audio/sound-effects/game-over.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+
+    <audio id="click-sound" preload="auto">
+      <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script src="js/sound.js"></script>
     <script src="js/config.js" defer></script>
-<script src="js/ui.js" defer></script>
-<script src="js/balloon.js" defer></script>
-<script src="js/game.js" defer></script>
-<script src="js/main.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/balloon.js" defer></script>
+    <script src="js/game.js" defer></script>
+    <script src="js/main.js" defer></script>
   </body>
 </html>
