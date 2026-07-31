@@ -48,6 +48,9 @@ function createBalloon() {
     // Block popping while paused
     if (!gameRunning || gamePaused) return;
 
+    score += 10;
+    updateScore();
+
     coins += COINS_PER_POP;
     updateCoins();
 

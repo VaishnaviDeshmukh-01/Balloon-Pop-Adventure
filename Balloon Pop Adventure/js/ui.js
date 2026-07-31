@@ -53,12 +53,38 @@ function updateEnergy() {
 
 function gameOver() {
   gameRunning = false;
+
   clearInterval(spawnInterval);
+
   balloonContainer.innerHTML = "";
 
-  finalScore.textContent = Math.floor(score).toLocaleString();
-  gameOverScreen.classList.remove("hidden");
-
   stopGameMusic();
+
   playSound(document.getElementById("game-over-sound"));
+
+  const currentScore = Math.floor(score);
+
+  currentScoreEl.textContent = currentScore.toLocaleString();
+
+  highestScoreEl.textContent = bestScore.toLocaleString();
+
+  earnedCoinsEl.textContent = coins.toLocaleString();
+
+  // Total coins stored forever
+  let totalCoins =
+    parseInt(localStorage.getItem("totalCoins")) || 0;
+
+  totalCoins += coins;
+
+  localStorage.setItem("totalCoins", totalCoins);
+
+  totalCoinsEl.textContent = totalCoins.toLocaleString();
+
+  if (currentScore >= bestScore) {
+    newRecordEl.classList.remove("hidden");
+  } else {
+    newRecordEl.classList.add("hidden");
+  }
+
+  gameOverScreen.classList.remove("hidden");
 }

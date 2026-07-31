@@ -11,21 +11,27 @@ function startGame() {
 }
 
 function resetGame() {
-  clearInterval(spawnInterval);
 
-  score = 0;
-  coins = 0;
-  energy = MAX_ENERGY;
-  lastTime = 0;
+    clearInterval(spawnInterval);
 
-  updateScore();
-  updateCoins();
-  updateEnergy();
+    gameRunning = false;
 
-  balloonContainer.innerHTML = "";
-  gameOverScreen.classList.add("hidden");
+    gamePaused = false;
 
-  startGame();
+    balloonContainer.innerHTML="";
+
+    gameOverScreen.classList.add("hidden");
+
+    score = 0;
+    coins = 0;
+    energy = MAX_ENERGY;
+
+    updateScore();
+    updateCoins();
+    updateEnergy();
+
+    startGame();
+
 }
 
 function pauseGame() {

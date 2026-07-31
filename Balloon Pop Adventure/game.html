@@ -1,41 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>Balloon Pop Adventure | Fun Balloon Popping Game for Kids</title>
     <meta
       name="description"
-      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure." />
+      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure."
+    />
 
     <meta
       name="keywords"
-      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game" />
+      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game"
+    />
 
     <meta name="author" content="Foxzoid Studio" />
 
     <meta name="robots" content="index, follow" />
     <link rel="icon" href="assets/favicon.png" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-
     <div class="game-ui">
-
       <div class="top-bar">
-        <div class="pause-btn" title="Pause">
+        <button class="pause-btn" aria-label="Pause Game">
           <div class="pause-icon">
             <span></span>
             <span></span>
           </div>
-        </div>
+        </button>
 
         <div class="energy-wrap">
           <svg class="heart-icon" viewBox="0 0 24 24" fill="#FF1744">
             <path
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+            />
           </svg>
 
           <div class="energy-bar">
@@ -44,31 +47,56 @@
               <div class="energy-text">100 / 100</div>
             </div>
 
-            <div class="plus-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#fff"
-                stroke-width="3.5" stroke-linecap="round">
+            <button class="plus-btn" aria-label="Buy Energy">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#fff"
+                stroke-width="3.5"
+                stroke-linecap="round"
+              >
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
-            </div>
+            </button>
           </div>
         </div>
 
         <!-- ===== SCORE BOX ===== -->
         <div class="score-box">
           <div class="score-label">Score</div>
-          <div class="score-value">0</div>
-          <div class="best-score">Best : 0</div>
+          <div id="score-value" class="score-value">0</div>
+          <div id="best-score" class="best-score">Best : 0</div>
         </div>
 
-        <div class="coins">
+        <div class="coins" aria-label="Coins">
           <svg class="coin-icon" viewBox="0 0 32 32">
-            <circle cx="16" cy="16" r="14" fill="#FFD600" stroke="#F9A825"
-              stroke-width="2" />
-            <circle cx="16" cy="16" r="10" fill="#FFEA00" stroke="#FBC02D"
-              stroke-width="1.5" />
-            <text x="16" y="21" text-anchor="middle" font-size="14"
-              font-weight="900" fill="#F57F17">$</text>
+            <circle
+              cx="16"
+              cy="16"
+              r="14"
+              fill="#FFD600"
+              stroke="#F9A825"
+              stroke-width="2"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="10"
+              fill="#FFEA00"
+              stroke="#FBC02D"
+              stroke-width="1.5"
+            />
+            <text
+              x="16"
+              y="21"
+              text-anchor="middle"
+              font-size="14"
+              font-weight="900"
+              fill="#F57F17"
+            >
+              $
+            </text>
           </svg>
           <span class="coin-value">0</span>
         </div>
@@ -80,28 +108,55 @@
 
       <div id="balloon-container" class="balloon-container"></div>
 
-      <section class="game-over hidden">
-        <h2>Game Over</h2>
+      <section class="game-over-overlay hidden">
+        <div class="game-over-card">
+          <h1>💥 Game Over</h1>
 
-        <p>
-          Score:
-          <span class="final-score">0</span>
-        </p>
+          <p class="subtitle">Better Luck Next Time!</p>
 
-        <div class="game-over-buttons">
-          <button id="restart-btn">Play Again</button>
-          <button id="home-btn">🏠 Return Home</button>
+          <div class="stats">
+            <div class="stat">
+              <span>🏆 Highest Score</span>
+              <strong id="highest-score">0</strong>
+            </div>
+
+            <div class="stat">
+              <span>⭐ Current Score</span>
+              <strong id="current-score">0</strong>
+            </div>
+
+            <div class="stat">
+              <span>🪙 Total Coins</span>
+              <strong id="total-coins">0</strong>
+            </div>
+
+            <div class="stat">
+              <span>💰 Coins Earned</span>
+              <strong id="earned-coins">0</strong>
+            </div>
+          </div>
+
+          <h2 id="new-record" class="hidden">🏆 NEW HIGH SCORE!</h2>
+
+          <div class="popup-buttons">
+            <button id="restart-btn" class="play-btn-popup">
+              🔄 Play Again
+            </button>
+
+            <button id="home-btn" class="home-btn-popup">🏠 Home</button>
+          </div>
         </div>
       </section>
-
     </div>
 
     <audio id="pop-sound" preload="auto">
       <source src="assets/audio/sound-effects/pop.mp3" type="audio/mpeg" />
     </audio>
     <audio id="game-over-sound" preload="auto">
-      <source src="assets/audio/sound-effects/game-over.mp3"
-        type="audio/mpeg" />
+      <source
+        src="assets/audio/sound-effects/game-over.mp3"
+        type="audio/mpeg"
+      />
     </audio>
     <audio id="click-sound" preload="auto">
       <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg" />
@@ -112,11 +167,11 @@
     </audio>
 
     <script src="js/config.js" defer></script>
-    <script src="js/sound.js" defer></script> <!-- ← THIS WAS MISSING -->
+    <script src="js/sound.js" defer></script>
+    <!-- ← THIS WAS MISSING -->
     <script src="js/ui.js" defer></script>
     <script src="js/balloon.js" defer></script>
     <script src="js/game.js" defer></script>
     <script src="js/main.js" defer></script>
-
   </body>
 </html>

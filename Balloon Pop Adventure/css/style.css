@@ -18,7 +18,7 @@ body {
 }
 
 body {
-  background: url("assets/bg-img.png") center center / cover no-repeat;
+  background: url("../assets/bg-img.png") center center/cover no-repeat;
   background-color: #5dade2;
   position: relative;
 }
@@ -300,6 +300,8 @@ body::before {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
+
+
 .best-score {
   font-size: clamp(9px, 2.2vw, 11px);
   color: #7eb3ff;
@@ -371,7 +373,9 @@ body::before {
   z-index: 20;
   display: flex;
   align-items: center;
-  animation: dangerAppear 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  animation:
+    dangerAppear 0.8s,
+    dangerFlash 2s infinite;
 }
 
 @keyframes dangerAppear {
@@ -385,6 +389,16 @@ body::before {
   }
 }
 
+@keyframes dangerFlash {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
 .danger-line::before {
   content: "";
   position: absolute;
@@ -464,77 +478,180 @@ body::before {
   opacity: 0;
 }
 
-/* Game Over */
-.game-over {
-  position: absolute;
+.game-over-overlay {
+  position: fixed;
   inset: 0;
-  z-index: 50;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  backdrop-filter: blur(8px);
+
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  gap: clamp(10px, 3vw, 16px);
+
+  z-index: 9999;
+
+  animation: fadeIn 0.4s;
+}
+
+.hidden {
+  display: none;
+}
+
+.game-over-card {
+  width: min(430px, 92%);
+
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(18px);
+
+  border: 2px solid rgba(255, 255, 255, 0.3);
+
+  border-radius: 30px;
+
+  padding: 35px;
+
   text-align: center;
-  padding: 20px;
-}
-.game-over.hidden {
-  display: none !important;
-}
-.game-over h2 {
-  font-size: clamp(1.6rem, 7vw, 2.4rem);
-  font-weight: 800;
-}
-.game-over p {
-  font-size: clamp(1rem, 4vw, 1.3rem);
-}
-#restart-btn {
-  margin-top: 12px;
-  padding: clamp(10px, 3vw, 14px) clamp(24px, 8vw, 36px);
-  font-size: clamp(0.95rem, 3.5vw, 1.1rem);
-  font-weight: 700;
-  border: none;
-  border-radius: 50px;
-  background: linear-gradient(145deg, #ffb347, #ff8c00);
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
-}
-#restart-btn:active {
-  transform: scale(0.95);
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+
+  animation: popup 0.4s;
 }
 
-.game-over-buttons {
+.game-over-card h1 {
+  font-size: 42px;
+
+  margin-bottom: 10px;
+
+  color: #ff5252;
+}
+
+.subtitle {
+  color: #666;
+
+  margin-bottom: 25px;
+
+  font-size: 18px;
+}
+
+.stats {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
+}
+
+.stat {
+  background: #f8f8f8;
+
+  border-radius: 15px;
+
+  padding: 15px;
+
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 10px;
+
+  flex-direction: column;
+
+  gap: 6px;
 }
 
-#home-btn {
-  padding: clamp(12px, 2vw, 16px) clamp(24px, 5vw, 40px);
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  border-radius: 50px;
-  min-height: 48px;
+.stat span {
+  font-size: 14px;
+
+  color: #666;
+}
+
+.stat strong {
+  font-size: 22px;
+
+  color: #222;
+}
+
+#new-record {
+  color: #ff9800;
+
+  margin-bottom: 20px;
+
+  animation: pulse 1s infinite;
+}
+
+.popup-buttons {
+  display: flex;
+
+  gap: 15px;
+}
+
+.popup-buttons button {
+  flex: 1;
+
+  padding: 16px;
+
   border: none;
-  background: #4caf50;
-  color: white;
+
+  border-radius: 15px;
+
+  font-size: 18px;
+
   font-weight: bold;
+
   cursor: pointer;
-  transition: 0.3s;
+
+  transition: 0.25s;
 }
 
-#home-btn:hover {
-  background: #43a047;
+.play-btn-popup {
+  background: #4caf50;
+
+  color: white;
+}
+
+.play-btn-popup:hover {
   transform: scale(1.05);
 }
 
-#home-btn:active {
-  transform: scale(0.95);
+.home-btn-popup {
+  background: #2196f3;
+
+  color: white;
 }
 
+.home-btn-popup:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.8);
+
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.08);
+  }
+}
 /* ========== RESPONSIVE BREAKPOINTS ========== */
 
 /* Very small phones */
