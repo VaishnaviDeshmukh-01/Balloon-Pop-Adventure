@@ -1,6 +1,22 @@
 function updateScore() {
+  if (scoreValueEl) {
+    scoreValueEl.textContent = Math.floor(score).toLocaleString();
+  }
+
+  // Update Best score
+  if (Math.floor(score) > bestScore) {
+    bestScore = Math.floor(score);
+    localStorage.setItem("bestScore", bestScore);
+  }
+
+  if (bestScoreEl) {
+    bestScoreEl.textContent = "Best : " + bestScore.toLocaleString();
+  }
+}
+
+function updateCoins() {
   if (coinValue) {
-    coinValue.textContent = score;
+    coinValue.textContent = coins;
   }
 }
 
@@ -16,7 +32,7 @@ function updateEnergy() {
     energyText.textContent = energy + " / " + MAX_ENERGY;
   }
 
-  // Optional color shift when low
+  // Color change when low
   if (energyFill) {
     if (energy > 50) {
       energyFill.style.background =
@@ -35,16 +51,14 @@ function updateEnergy() {
   }
 }
 
-
 function gameOver() {
   gameRunning = false;
   clearInterval(spawnInterval);
   balloonContainer.innerHTML = "";
 
-  finalScore.textContent = score;
+  finalScore.textContent = Math.floor(score).toLocaleString();
   gameOverScreen.classList.remove("hidden");
 
-  // Sound
   stopGameMusic();
   playSound(document.getElementById("game-over-sound"));
 }

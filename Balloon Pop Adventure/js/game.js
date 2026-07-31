@@ -2,23 +2,30 @@ function startGame() {
   if (gameRunning) return;
 
   gameRunning = true;
-  startGameMusic();                    // ← add this
+  lastTime = 0;
+  startGameMusic();
   spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
+
+  // Start continuous score
+  requestAnimationFrame(updateScoreByTime);
 }
 
 function resetGame() {
   clearInterval(spawnInterval);
 
   score = 0;
+  coins = 0;
   energy = MAX_ENERGY;
+  lastTime = 0;
 
   updateScore();
+  updateCoins();
   updateEnergy();
 
   balloonContainer.innerHTML = "";
   gameOverScreen.classList.add("hidden");
 
-  startGame();   // this will also restart music
+  startGame();
 }
 
 function pauseGame() {
@@ -35,6 +42,30 @@ function pauseGame() {
   } else {
     spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
     if (pauseBtn) pauseBtn.title = "Pause";
+    lastTime = 0; // prevent big jump when resuming
   }
 }
 
+// Continuous score with acceleration
+function updateScoreByTime(timestamp) {
+  if (!gameRunning) return;
+
+  if (gamePaused) {
+    lastTime = timestamp;
+    requestAnimationFrame(updateScoreByTime);
+    return;
+  }
+
+  if (lastTime === 0) lastTime = timestamp;
+
+  const delta = (timestamp - lastTime) / 1000; // seconds
+  lastTime = timestamp;
+
+  // Accelerating score (like Subway Surfers)
+  const speedIncrease = Math.floor(score / 1000) * 5;
+  score += (baseSpeed + speedIncrease) * delta;
+
+  updateScore();
+
+  requestAnimationFrame(updateScoreByTime);
+}

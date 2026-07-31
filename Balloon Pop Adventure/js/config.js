@@ -8,13 +8,20 @@ const balloonImages = [
 const balloonSpeed = window.innerWidth <= 768 ? 4 : 2;
 
 let score = 0;
+let coins = 0;
+let bestScore = parseInt(localStorage.getItem("bestScore")) || 0;
 let energy = 100;
 let gameRunning = false;
 let gamePaused = false;
 let spawnInterval = null;
+let lastTime = 0;
+
+// Score settings
+const baseSpeed = 40;               // starting points per second
+const COINS_PER_POP = 5;            // coins you get when popping a balloon
 
 const balloonContainer = document.getElementById("balloon-container");
-const gameBoard = balloonContainer; // full-screen play area
+const gameBoard = balloonContainer;
 const dangerLine = document.querySelector(".danger-line");
 const gameOverScreen = document.querySelector(".game-over");
 const finalScore = document.querySelector(".final-score");
@@ -25,8 +32,11 @@ const coinValue = document.querySelector(".coin-value");
 const pauseBtn = document.querySelector(".pause-btn");
 const plusBtn = document.querySelector(".plus-btn");
 
+// New Score UI elements
+const scoreValueEl = document.querySelector(".score-value");
+const bestScoreEl = document.querySelector(".best-score");
+
 const SPAWN_INTERVAL = 1000;
 const BALLOON_WIDTH = 80;
 const ENERGY_LOSS = 10;
 const MAX_ENERGY = 100;
-const POINTS_PER_POP = 10;
