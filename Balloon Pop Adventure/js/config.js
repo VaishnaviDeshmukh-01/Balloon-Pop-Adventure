@@ -15,6 +15,8 @@ let gameRunning = false;
 let gamePaused = false;
 let spawnInterval = null;
 let lastTime = 0;
+let gameStartTime = 0;
+let pausedTime = 0;
 
 // Score settings
 const baseSpeed = 40;               // starting points per second
@@ -31,6 +33,13 @@ const energyText = document.querySelector(".energy-text");
 const coinValue = document.querySelector(".coin-value");
 const pauseBtn = document.querySelector(".pause-btn");
 const plusBtn = document.querySelector(".plus-btn");
+const pauseOverlay = document.getElementById("pause-overlay");
+const restartPauseBtn = document.querySelector(".restart-btn");
+const homePauseBtn = document.querySelector(".home-btn");
+
+const resumeBtn = document.getElementById("resume-btn");
+const closePause = document.getElementById("close-pause");
+
 
 // New Score UI elements
 const scoreValueEl = document.querySelector(".score-value");

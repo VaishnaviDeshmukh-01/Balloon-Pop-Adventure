@@ -31,3 +31,29 @@ if (pauseBtn) {
     pauseGame();
   });
 }
+
+resumeBtn.addEventListener("click", () => {
+  playSound(document.getElementById("click-sound"));
+  resumeGame();
+});
+closePause.addEventListener("click", () => {
+  playSound(document.getElementById("click-sound"));
+  resumeGame();
+});
+
+if (restartPauseBtn) {
+  restartPauseBtn.addEventListener("click", () => {
+    playSound(document.getElementById("click-sound"));
+    pauseOverlay.classList.add("hidden");
+    gamePaused = false;
+    resetGame();
+  });
+}
+
+homePauseBtn.addEventListener("click", () => {
+
+    playSound(document.getElementById("click-sound"));
+
+    window.location.href = "index.html"; 
+
+});

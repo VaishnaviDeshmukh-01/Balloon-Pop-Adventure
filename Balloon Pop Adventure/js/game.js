@@ -2,6 +2,7 @@ function startGame() {
   if (gameRunning) return;
 
   gameRunning = true;
+  gameStartTime = Date.now();
   lastTime = 0;
   startGameMusic();
   spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
@@ -17,6 +18,8 @@ function resetGame() {
     gameRunning = false;
 
     gamePaused = false;
+
+    gameStartTime = Date.now();
 
     balloonContainer.innerHTML="";
 
@@ -35,21 +38,36 @@ function resetGame() {
 }
 
 function pauseGame() {
-  if (!gameRunning) return;
 
-  gamePaused = !gamePaused;
+    if (!gameRunning || gamePaused) return;
 
-  if (gamePaused) {
-    if (spawnInterval) {
-      clearInterval(spawnInterval);
-      spawnInterval = null;
-    }
-    if (pauseBtn) pauseBtn.title = "Resume";
-  } else {
+    gamePaused = true;
+
+    pauseOverlay.classList.remove("hidden");
+
+    document.getElementById("pause-score").textContent = Math.floor(score);
+    document.getElementById("pause-best").textContent = Math.floor(bestScore);
+    document.getElementById("pause-coins").textContent = coins;
+    document.getElementById("pause-time").textContent = getGameTime();
+
+    cancelAnimationFrame(animationId);
+
+    clearInterval(spawnInterval);
+
+}
+
+function resumeGame() {
+
+    if (!gamePaused) return;
+
+    gamePaused = false;
+
+    pauseOverlay.classList.add("hidden");
+
+    animate();
+
     spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
-    if (pauseBtn) pauseBtn.title = "Pause";
-    lastTime = 0; // prevent big jump when resuming
-  }
+
 }
 
 // Continuous score with acceleration
@@ -75,3 +93,25 @@ function updateScoreByTime(timestamp) {
 
   requestAnimationFrame(updateScoreByTime);
 }
+
+function getGameTime() {
+
+    const elapsed = Math.floor(
+        (Date.now() - gameStartTime - pausedTime) / 1000
+    );
+
+    const hours = Math.floor(elapsed / 3600);
+    const minutes = Math.floor((elapsed % 3600) / 60);
+    const seconds = elapsed % 60;
+
+    if (hours > 0) {
+        return `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    if (minutes > 0) {
+        return `${minutes}m ${seconds}s`;
+    }
+
+    return `${seconds}s`;
+}
+document.getElementById("pause-time").textContent = getGameTime();

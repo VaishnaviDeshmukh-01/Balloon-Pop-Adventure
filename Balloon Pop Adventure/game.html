@@ -4,19 +4,16 @@
     <meta charset="UTF-8" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Balloon Pop Adventure | Fun Balloon Popping Game for Kids</title>
     <meta
       name="description"
-      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure."
-    />
+      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure." />
 
     <meta
       name="keywords"
-      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game"
-    />
+      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game" />
 
     <meta name="author" content="Foxzoid Studio" />
 
@@ -37,8 +34,7 @@
         <div class="energy-wrap">
           <svg class="heart-icon" viewBox="0 0 24 24" fill="#FF1744">
             <path
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-            />
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
           </svg>
 
           <div class="energy-bar">
@@ -53,8 +49,7 @@
                 fill="none"
                 stroke="#fff"
                 stroke-width="3.5"
-                stroke-linecap="round"
-              >
+                stroke-linecap="round">
                 <line x1="12" y1="5" x2="12" y2="19" />
                 <line x1="5" y1="12" x2="19" y2="12" />
               </svg>
@@ -77,24 +72,21 @@
               r="14"
               fill="#FFD600"
               stroke="#F9A825"
-              stroke-width="2"
-            />
+              stroke-width="2" />
             <circle
               cx="16"
               cy="16"
               r="10"
               fill="#FFEA00"
               stroke="#FBC02D"
-              stroke-width="1.5"
-            />
+              stroke-width="1.5" />
             <text
               x="16"
               y="21"
               text-anchor="middle"
               font-size="14"
               font-weight="900"
-              fill="#F57F17"
-            >
+              fill="#F57F17">
               $
             </text>
           </svg>
@@ -147,6 +139,69 @@
           </div>
         </div>
       </section>
+
+      <!-- ================= PAUSE POPUP ================= -->
+      <section id="pause-overlay" class="pause-overlay hidden">
+        <div class="pause-card">
+
+          <button id="close-pause" class="pause-close">
+            ✕
+          </button>
+
+          <div class="pause-title">
+            ⏸ GAME PAUSED
+          </div>
+
+          <div class="pause-content">
+
+            <div class="pause-stats">
+
+              <div class="pause-stat">
+                <span>Current Score</span>
+                <strong id="pause-score">0</strong>
+              </div>
+
+              <div class="pause-stat">
+                <span>Best Score</span>
+                <strong id="pause-best">0</strong>
+              </div>
+
+              <div class="pause-stat">
+                <span>Coins</span>
+                <strong id="pause-coins">0</strong>
+              </div>
+
+              <div class="pause-stat">
+                <span>Time Played</span>
+                <strong id="pause-time">00:00</strong>
+              </div>
+
+            </div>
+
+            <div class="pause-buttons">
+
+              <button id="resume-btn" class="resume-btn">
+                ▶ Resume
+              </button>
+
+              <div class="bottom-buttons">
+
+                <button id="restart-pause-btn" class="restart-btn">
+                  🔄 Restart
+                </button>
+                
+                <button id="home-pause-btn" class="home-btn">
+                  🏠 Home
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
     </div>
 
     <audio id="pop-sound" preload="auto">
@@ -155,8 +210,7 @@
     <audio id="game-over-sound" preload="auto">
       <source
         src="assets/audio/sound-effects/game-over.mp3"
-        type="audio/mpeg"
-      />
+        type="audio/mpeg" />
     </audio>
     <audio id="click-sound" preload="auto">
       <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg" />
