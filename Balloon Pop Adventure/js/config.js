@@ -19,8 +19,77 @@ let gameStartTime = 0;
 let pausedTime = 0;
 
 // Score settings
-const baseSpeed = 40;               // starting points per second
-const COINS_PER_POP = 5;            // coins you get when popping a balloon
+const baseSpeed = 40;
+const COINS_PER_POP = 5;
+
+// ============== POWER BALLOONS ==============
+const SPECIAL_CHANCE = 0.10; // 10% chance a balloon is special
+
+const specialBalloons = {
+  golden: {
+    image: "assets/golden-balloon.png",
+    weight: 40,
+    onPop: () => {
+      score += 50 * scoreMultiplier;
+      coins += 25;
+      showFloatingText("+50 ★", "#FFD700");
+      updateScore();
+      updateCoins();
+    },
+    onDanger: () => {
+      energy -= ENERGY_LOSS;
+    },
+  },
+  heart: {
+    image: "assets/heart-balloon.png",
+    weight: 30,
+    onPop: () => {
+      energy = Math.min(MAX_ENERGY, energy + 25);
+      showFloatingText("+25 ❤️", "#FF69B4");
+      updateEnergy();
+    },
+    onDanger: () => {
+      energy -= ENERGY_LOSS;
+    },
+  },
+  bomb: {
+    image: "assets/bomb-balloon.png",
+    weight: 20,
+    onPop: () => {
+      energy = Math.max(0, energy - 15);
+      showFloatingText("-15 💣", "#FF4500");
+      updateEnergy();
+    },
+    onDanger: () => {
+      energy -= ENERGY_LOSS * 2; // double damage
+    },
+  },
+  rainbow: {
+    image: "assets/rainbow-balloon.png",
+    weight: 10, // rarest
+    onPop: () => {
+      activateComboMultiplier(5, 2);
+      showFloatingText("×2 COMBO!", "#00FFFF");
+    },
+    onDanger: () => {
+      energy -= ENERGY_LOSS;
+    },
+  },
+};
+
+// Score multiplier system
+let scoreMultiplier = 1;
+let multiplierTimeout = null;
+
+function activateComboMultiplier(seconds, mult) {
+  scoreMultiplier = mult;
+  clearTimeout(multiplierTimeout);
+  multiplierTimeout = setTimeout(() => {
+    scoreMultiplier = 1;
+  }, seconds * 1000);
+}
+
+// ============================================
 
 const balloonContainer = document.getElementById("balloon-container");
 const gameBoard = balloonContainer;
@@ -40,8 +109,6 @@ const homePauseBtn = document.querySelector(".home-btn");
 const resumeBtn = document.getElementById("resume-btn");
 const closePause = document.getElementById("close-pause");
 
-
-// New Score UI elements
 const scoreValueEl = document.querySelector(".score-value");
 const bestScoreEl = document.querySelector(".best-score");
 

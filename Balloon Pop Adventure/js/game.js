@@ -115,3 +115,7 @@ function getGameTime() {
     return `${seconds}s`;
 }
 document.getElementById("pause-time").textContent = getGameTime();
+
+// Accelerating score (like Subway Surfers)
+const speedIncrease = Math.floor(score / 1000) * 5;
+score += (baseSpeed + speedIncrease) * delta * scoreMultiplier;   // ← added * scoreMultiplier
