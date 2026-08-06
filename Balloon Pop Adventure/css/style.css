@@ -823,6 +823,167 @@ PAUSE POPUP
 }
 
 
+/* ========== SHOP ========== */
+.shop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s;
+  overflow: hidden;                 /* prevent page scroll */
+}
+.shop-overlay.hidden { display: none; }
+
+.shop-card {
+  width: min(420px, 94%);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #fff9e6, #fff);
+  border-radius: 24px;
+  border: 3px solid #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  padding: 24px 20px 20px;
+  position: relative;
+  text-align: center;
+  overflow: hidden;                 /* no scrollbar on the card itself */
+}
+
+.shop-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: #ff5252;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.shop-card h2 {
+  font-size: 26px;
+  margin-bottom: 8px;
+  color: #e65100;
+  flex-shrink: 0;
+}
+
+.shop-coins {
+  background: linear-gradient(90deg, #fffde7, #ffecb3);
+  padding: 8px 16px;
+  border-radius: 999px;
+  display: inline-block;
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: #f57f17;
+  border: 2px solid #fff;
+  flex-shrink: 0;
+}
+
+/* Only the list scrolls – scrollbar stays inside the box */
+.shop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 50vh;                 /* adjustable */
+  padding-right: 6px;               /* space for scrollbar */
+  margin-bottom: 12px;
+  flex: 1;
+}
+
+/* Optional: nicer thin scrollbar */
+.shop-list::-webkit-scrollbar {
+  width: 6px;
+}
+.shop-list::-webkit-scrollbar-track {
+  background: #ffe0b2;
+  border-radius: 10px;
+}
+.shop-list::-webkit-scrollbar-thumb {
+  background: #ff9800;
+  border-radius: 10px;
+}
+
+.shop-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 2px solid #ffe0b2;
+  text-align: left;
+  flex-shrink: 0;
+}
+.shop-item.owned {
+  border-color: #81c784;
+  background: #f1f8e9;
+}
+
+.shop-icon {
+  font-size: 32px;
+  width: 48px;
+  text-align: center;
+}
+
+.shop-info { flex: 1; }
+.shop-name { font-weight: 800; font-size: 16px; color: #333; }
+.shop-desc { font-size: 12px; color: #777; margin-top: 2px; }
+.shop-status { font-size: 11px; color: #2e7d32; font-weight: 700; margin-top: 3px; }
+
+.shop-buy-btn {
+  background: linear-gradient(145deg, #ffb347, #ff8c00);
+  border: 2px solid #fff;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  min-width: 70px;
+  box-shadow: 0 3px 10px rgba(255,140,0,0.4);
+  transition: transform 0.15s;
+}
+.shop-buy-btn:hover:not(:disabled) { transform: scale(1.08); }
+.shop-buy-btn:disabled {
+  background: #bdbdbd;
+  box-shadow: none;
+  cursor: default;
+}
+
+.shop-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.shop-play-btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffdd55, #ff9d00);
+  box-shadow: 0 6px 0 #e67e00;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.shop-play-btn.hidden { display: none; }
+
+
 /* ========== POWER BALLOONS ========== */
 .balloon.special-golden {
   filter: drop-shadow(0 0 10px gold) brightness(1.15);

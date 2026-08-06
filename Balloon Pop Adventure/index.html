@@ -7,13 +7,11 @@
     <title>Balloon Pop Adventure | Fun Balloon Popping Game for Kids</title>
     <meta
       name="description"
-      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure."
-    />
+      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure." />
 
     <meta
       name="keywords"
-      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game"
-    />
+      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game" />
 
     <meta name="author" content="Foxzoid Studio" />
 
@@ -48,6 +46,8 @@
       <button id="settings-btn" class="settings-btn" aria-label="Settings">
         ⚙️
       </button>
+      <!-- Settings + Shop (top-right) -->
+      <button id="shop-btn-home" class="shop-btn-home" aria-label="Shop">🛒</button>
 
       <div class="cloud cloud1"></div>
 
@@ -63,6 +63,7 @@
 
       <div class="logo-area">
         <img src="assets/game-logo.png" class="game-logo" />
+
 
         <p class="tagline">🎈 Pop Balloons • Earn Points • Have Fun! 🎈</p>
 
@@ -136,23 +137,23 @@
       <small>Version 1.0.0 • © 2026 Foxzoid Studio. All Rights Reserved.</small>
     </footer>
     <audio id="bg-music" loop preload="auto">
-    <source src="assets/audio/home-music.mp3" type="audio/mpeg">
-</audio>
-<audio id="click-sound" preload="auto">
-    <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg">
-</audio>
+      <source src="assets/audio/home-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sound" preload="auto">
+      <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="popup-sound" preload="auto">
-    <source src="assets/audio/sound-effects/pop.mp3" type="audio/mpeg">
-</audio>
+    <audio id="popup-sound" preload="auto">
+      <source src="assets/audio/sound-effects/pop.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="bonus-sound" preload="auto">
-    <source src="assets/audio/sound-effects/bonus.mp3" type="audio/mpeg">
-</audio>
+    <audio id="bonus-sound" preload="auto">
+      <source src="assets/audio/sound-effects/bonus.mp3" type="audio/mpeg">
+    </audio>
 
-<audio id="game-over-sound" preload="auto">
-    <source src="assets/audio/sound-effects/game-over.mp3" type="audio/mpeg">
-</audio>
+    <audio id="game-over-sound" preload="auto">
+      <source src="assets/audio/sound-effects/game-over.mp3" type="audio/mpeg">
+    </audio>
     <script>
       function startGame() {
         window.location.href = "game.html";

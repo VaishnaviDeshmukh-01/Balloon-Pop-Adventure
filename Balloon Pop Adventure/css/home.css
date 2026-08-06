@@ -992,6 +992,63 @@ margin-bottom:8px;
 width:100%;
 
 }
+
+/* ================= SHOP BUTTON (below Settings) ================= */
+.shop-btn-home {
+  position: absolute;
+  top: 90px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #7c4dff, #651fff);
+  color: #fff;
+  box-shadow:
+    0 6px 0 #4a148c,
+    0 10px 22px rgba(103, 58, 183, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 999;
+}
+
+.shop-btn-home:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 8px 0 #4a148c,
+    0 14px 28px rgba(103, 58, 183, 0.5);
+}
+
+.shop-btn-home:active {
+  transform: scale(0.93);
+  box-shadow:
+    0 3px 0 #4a148c,
+    0 6px 14px rgba(103, 58, 183, 0.35);
+}
+
+@media (max-width: 768px) {
+  .shop-btn-home {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    top: 78px;
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-btn-home {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+    top: 72px;
+    right: 12px;
+  }
+}
 /* ================= MOBILE ================= */
 
 @media (max-width: 768px) {

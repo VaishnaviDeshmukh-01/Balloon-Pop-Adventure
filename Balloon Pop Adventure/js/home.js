@@ -198,6 +198,23 @@ document.querySelectorAll(".setting-btn").forEach((button) => {
   });
 });
 
+// Shop button (top-right, under settings)
+const shopBtnHome = document.getElementById("shop-btn-home");
+if (shopBtnHome) {
+  shopBtnHome.addEventListener("click", () => {
+    playSound(clickSound);
+    vibrate(30);
+    localStorage.setItem("openShopOnLoad", "1");
+    window.location.href = "game.html";
+  });
+}
+
+// Show total coins
+const homeCoinsEl = document.getElementById("home-total-coins");
+if (homeCoinsEl) {
+  homeCoinsEl.textContent = (parseInt(localStorage.getItem("totalCoins")) || 0).toLocaleString();
+}
+
 
 /* ==========================================
    LOADING SCREEN

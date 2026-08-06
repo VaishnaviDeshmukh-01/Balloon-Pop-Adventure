@@ -8,7 +8,6 @@ function createBalloon() {
   let type = "normal";
   let special = null;
 
-  // Decide if this balloon is special
   if (Math.random() < SPECIAL_CHANCE) {
     const types = Object.keys(specialBalloons);
     const totalWeight = types.reduce((sum, t) => sum + specialBalloons[t].weight, 0);
@@ -44,6 +43,9 @@ function createBalloon() {
 
   const dangerPosition = gameBoard.clientHeight * 0.72;
 
+  // Slow-mo reduces rise speed
+  const currentSpeed = activeSlowMotion ? balloonSpeed * 0.55 : balloonSpeed;
+
   function animate() {
     if (!balloon.isConnected || !gameRunning) return;
     if (gamePaused) {
@@ -51,14 +53,14 @@ function createBalloon() {
       return;
     }
 
-    y += balloonSpeed;
+    y += currentSpeed;
     balloon.style.bottom = y + "px";
 
     if (y >= dangerPosition) {
       if (special && special.onDanger) {
         special.onDanger();
       } else {
-        energy -= ENERGY_LOSS;
+        applyEnergyLoss(ENERGY_LOSS);
       }
       updateEnergy();
       balloon.remove();
@@ -70,42 +72,58 @@ function createBalloon() {
 
   animate();
 
-  balloon.addEventListener("click", () => {
+  balloon.addEventListener("click", (e) => {
     if (!gameRunning || gamePaused) return;
 
-    if (special && special.onPop) {
-      special.onPop();
-    } else {
-      // Normal balloon
-      score += 10 * scoreMultiplier;
-      coins += COINS_PER_POP;
-      updateScore();
-      updateCoins();
+    // Multi-pop
+    if (upgradeLevels.multiPop > 0) {
+      const rect = balloon.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      document.querySelectorAll(".balloon-container .balloon").forEach((other) => {
+        if (other === balloon || other.classList.contains("pop")) return;
+        const r = other.getBoundingClientRect();
+        const ox = r.left + r.width / 2;
+        const oy = r.top + r.height / 2;
+        const dist = Math.hypot(cx - ox, cy - oy);
+        if (dist < 95) {
+          popBalloon(other);
+        }
+      });
     }
 
-    playSound(document.getElementById("pop-sound"));
-
-    balloon.classList.add("pop");
-    setTimeout(() => {
-      balloon.remove();
-    }, 200);
+    popBalloon(balloon);
   });
 }
 
-// Floating text when special balloons are popped
+function popBalloon(balloon) {
+  if (!balloon || balloon.classList.contains("pop")) return;
+
+  const type = balloon.dataset.type;
+  const special = type !== "normal" ? specialBalloons[type] : null;
+
+  if (special && special.onPop) {
+    special.onPop();
+  } else {
+    score += 10 * scoreMultiplier;
+    coins += COINS_PER_POP * (activeDoubleCoins ? 2 : 1);
+    updateScore();
+    updateCoins();
+  }
+
+  playSound(document.getElementById("pop-sound"));
+  balloon.classList.add("pop");
+  setTimeout(() => balloon.remove(), 200);
+}
+
 function showFloatingText(text, color = "#fff") {
   const el = document.createElement("div");
   el.className = "floating-text";
   el.textContent = text;
   el.style.color = color;
-
-  // Random position near center
   el.style.left = 40 + Math.random() * 20 + "%";
   el.style.top = 35 + Math.random() * 20 + "%";
-
   document.body.appendChild(el);
-
-  setTimeout(() => {
-    el.remove();
-  }, 1200);
+  setTimeout(() => el.remove(), 1200);
 }
