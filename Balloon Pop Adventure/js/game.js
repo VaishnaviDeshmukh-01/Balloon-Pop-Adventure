@@ -10,14 +10,14 @@ function startGame() {
   energy = MAX_ENERGY;
 
   startGameMusic();
-  spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
+  startSpawning();                 // ← changed
   requestAnimationFrame(updateScoreByTime);
   updateEnergy();
   updateCoins();
 }
 
 function resetGame() {
-  clearInterval(spawnInterval);
+  clearTimeout(spawnInterval);     // ← changed (was clearInterval)
   gameRunning = false;
   gamePaused = false;
   gameStartTime = Date.now();
@@ -46,14 +46,31 @@ function pauseGame() {
   document.getElementById("pause-coins").textContent = coins;
   document.getElementById("pause-time").textContent = getGameTime();
 
-  clearInterval(spawnInterval);
+  clearTimeout(spawnInterval);     // ← changed
 }
 
 function resumeGame() {
   if (!gamePaused) return;
   gamePaused = false;
   pauseOverlay.classList.add("hidden");
-  spawnInterval = setInterval(createBalloon, SPAWN_INTERVAL);
+  startSpawning();                 // ← changed
+}
+
+function startSpawning() {
+  clearTimeout(spawnInterval);
+
+  function spawnLoop() {
+    if (!gameRunning || gamePaused) return;
+
+    createBalloon();
+
+    // Schedule next balloon using current difficulty
+    const nextInterval = getCurrentSpawnInterval();
+    spawnInterval = setTimeout(spawnLoop, nextInterval);
+  }
+
+  // Start first balloon after a short delay
+  spawnInterval = setTimeout(spawnLoop, getCurrentSpawnInterval());
 }
 
 function updateScoreByTime(timestamp) {

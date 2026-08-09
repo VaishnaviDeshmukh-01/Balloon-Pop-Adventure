@@ -23,7 +23,7 @@ const baseSpeed = 40;
 const COINS_PER_POP = 5;
 
 // ============== POWER BALLOONS ==============
-const SPECIAL_CHANCE = 0.10;
+const SPECIAL_CHANCE = 0.10; // base chance
 
 const specialBalloons = {
   golden: {
@@ -90,6 +90,31 @@ function activateComboMultiplier(seconds, mult) {
 }
 
 // ============================================
+// PROGRESSIVE DIFFICULTY
+// ============================================
+function getDifficultyLevel() {
+  return Math.floor(score / 1500); // +1 level every 1500 points
+}
+
+function getCurrentSpawnInterval() {
+  const level = getDifficultyLevel();
+  // Starts at 1000ms → decreases by 70ms per level, minimum 420ms
+  return Math.max(420, 1000 - level * 70);
+}
+
+function getCurrentBalloonSpeed() {
+  const level = getDifficultyLevel();
+  // Base speed + 0.35 per level
+  return balloonSpeed + level * 0.35;
+}
+
+function getCurrentSpecialChance() {
+  const level = getDifficultyLevel();
+  // Base 10% → max ~22%
+  return Math.min(0.22, SPECIAL_CHANCE + level * 0.015);
+}
+
+// ============================================
 // SHOP / UPGRADES SYSTEM
 // ============================================
 
@@ -100,7 +125,7 @@ const SHOP_ITEMS = {
     icon: "❤️",
     desc: "Start with more max energy",
     maxLevel: 3,
-    costs: [100, 200, 400],          // cost for level 1,2,3
+    costs: [100, 200, 400],
     permanent: true,
   },
   multiPop: {
@@ -117,9 +142,9 @@ const SHOP_ITEMS = {
     name: "Shield",
     icon: "🛡️",
     desc: "Ignore next energy loss (stack up to 3)",
-    maxLevel: 3,                     // how many charges you can hold
+    maxLevel: 3,
     costs: [60, 60, 60],
-    permanent: false,                // charges are consumable
+    permanent: false,
   },
   slowMotion: {
     id: "slowMotion",
@@ -128,7 +153,7 @@ const SHOP_ITEMS = {
     desc: "Balloons rise slower next run",
     maxLevel: 1,
     costs: [70],
-    permanent: false,                // one-time use
+    permanent: false,
   },
   doubleCoins: {
     id: "doubleCoins",
@@ -154,7 +179,7 @@ let activeDoubleCoins = localStorage.getItem("active_doubleCoins") === "1";
 // Dynamic max energy based on permanent upgrade
 let MAX_ENERGY = 100 + upgradeLevels.extraEnergy * 20;
 const ENERGY_LOSS = 10;
-const SPAWN_INTERVAL = 1000;
+const SPAWN_INTERVAL = 1000; // kept for compatibility, but we now use dynamic
 const BALLOON_WIDTH = 80;
 
 // Apply energy loss with shield support
@@ -163,7 +188,7 @@ function applyEnergyLoss(amount) {
     upgradeLevels.shield--;
     localStorage.setItem("upg_shield", upgradeLevels.shield);
     showFloatingText("🛡️ SHIELD!", "#4CAF50");
-    updateEnergy(); // just refresh UI
+    updateEnergy();
     return;
   }
   energy -= amount;

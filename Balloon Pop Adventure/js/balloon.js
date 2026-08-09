@@ -8,7 +8,8 @@ function createBalloon() {
   let type = "normal";
   let special = null;
 
-  if (Math.random() < SPECIAL_CHANCE) {
+  // Use dynamic special chance based on difficulty
+  if (Math.random() < getCurrentSpecialChance()) {
     const types = Object.keys(specialBalloons);
     const totalWeight = types.reduce((sum, t) => sum + specialBalloons[t].weight, 0);
     let r = Math.random() * totalWeight;
@@ -43,8 +44,11 @@ function createBalloon() {
 
   const dangerPosition = gameBoard.clientHeight * 0.72;
 
-  // Slow-mo reduces rise speed
-  const currentSpeed = activeSlowMotion ? balloonSpeed * 0.55 : balloonSpeed;
+  // Progressive speed + Slow-Mo support
+  let currentSpeed = getCurrentBalloonSpeed();
+  if (activeSlowMotion) {
+    currentSpeed *= 0.55;
+  }
 
   function animate() {
     if (!balloon.isConnected || !gameRunning) return;
