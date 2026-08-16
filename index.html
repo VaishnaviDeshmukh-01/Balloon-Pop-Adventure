@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Balloon Pop Adventure | Fun Balloon Popping Game for Kids</title>
+    <meta
+      name="description"
+      content="Play Balloon Pop Adventure, a colorful balloon popping game for kids. Pop balloons, score points, and enjoy a fun arcade adventure."
+    />
+
+    <meta
+      name="keywords"
+      content="Balloon Pop Adventure, balloon game, kids game, HTML5 game, browser game, arcade game, balloon popping game"
+    />
+
+    <meta name="author" content="Foxzoid Studio" />
+
+    <meta name="robots" content="index, follow" />
+    <link rel="icon" href="assets/favicon.png" />
+
+    <link rel="stylesheet" href="css/home.css" />
+  </head>
+
+  <body>
+    <!-- ================= LOADING SCREEN ================= -->
+
+    <div id="loading-screen">
+      <div class="loading-overlay">
+        <div class="logo-wrapper">
+          <img src="assets/company-logo.png" class="loading-logo" />
+        </div>
+
+        <h2 class="loading-title">Balloon Pop Adventure</h2>
+
+        <p class="loading-text">Loading...</p>
+
+        <div class="loading-bar">
+          <div class="loading-progress" id="loading-progress"></div>
+        </div>
+
+        <span id="loading-percent"> 0% </span>
+      </div>
+    </div>
+    <div class="home-container">
+      <!-- ================= SETTINGS BUTTON ================= -->
+      <button id="settings-btn" class="settings-btn" aria-label="Settings">
+        ⚙️
+      </button>
+      <!-- Settings + Shop (top-right) -->
+      <button id="shop-btn-home" class="shop-btn-home" aria-label="Shop">
+        🛒
+      </button>
+
+      <div class="cloud cloud1"></div>
+
+      <div class="cloud cloud2"></div>
+
+      <div class="sparkle s1">✨</div>
+      <div class="sparkle s2">✨</div>
+      <div class="sparkle s3">⭐</div>
+
+      <img src="assets/mascot-left.PNG" class="mascot left" />
+
+      <img src="assets/mascot-right.png" class="mascot right" />
+
+      <div class="logo-area">
+        <img src="assets/game-logo.png" class="game-logo" />
+
+        <p class="tagline">🎈 Pop Balloons • Earn Points • Have Fun! 🎈</p>
+
+        <button class="play-btn">▶ PLAY NOW</button>
+      </div>
+
+      <div class="balloons">
+        <img src="assets/red-balloon.png" class="balloon b1" />
+
+        <img src="assets/blue-balloon.png" class="balloon b2" />
+
+        <img src="assets/yellow-balloon.png" class="balloon b3" />
+
+        <img src="assets/green-balloon.png" class="balloon b4" />
+      </div>
+
+      <div class="grass"></div>
+    </div>
+
+    <!-- ================= SETTINGS POPUP ================= -->
+    <div id="settings-modal" class="settings-modal">
+      <div class="settings-panel">
+        <button id="close-settings" class="close-settings">✖</button>
+
+        <h2>⚙️ Settings</h2>
+
+        <div class="setting-item">
+          <span>🎵 Music</span>
+
+          <label class="switch">
+            <input type="checkbox" id="music-toggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <span>🔊 Sound Effects</span>
+
+          <label class="switch">
+            <input type="checkbox" id="sound-toggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <span>🔔 Vibration</span>
+
+          <label class="switch">
+            <input type="checkbox" id="vibration-toggle" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item volume-item">
+          <span>🔉 Volume</span>
+
+          <input type="range" id="volume-slider" min="0" max="100" value="75" />
+        </div>
+
+        <button class="setting-btn" id="how-to-play-btn">📖 How to Play</button>
+        <button class="setting-btn" id="privacy-btn">🔒 Privacy Policy</button>
+
+        <button class="reset-btn">🗑 Reset Progress</button>
+      </div>
+    </div>
+
+    <!-- How to Play Modal -->
+    <div id="howto-modal" class="settings-modal">
+      <div class="settings-panel">
+        <button class="close-settings" id="close-howto">✖</button>
+        <h2>📖 How to Play</h2>
+        <div style="text-align: left; line-height: 1.6; font-size: 15px">
+          <p>🎈 Tap / click balloons to pop them and earn points.</p>
+          <hr>
+          <p>❤️ Heart balloons give extra energy.</p>
+          <hr>
+          <p>⭐ Golden / special balloons give bonus points or coins.</p>
+          <hr>
+          <p>💣 Avoid bomb balloons — they reduce energy!</p>
+          <hr>
+          <p>Keep your energy above 0. When it reaches 0 the game ends.</p>
+          <hr>
+          <p>Buy upgrades in the Shop to make the game easier and more fun!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="settings-modal">
+      <div class="settings-panel">
+        <button class="close-settings" id="close-privacy">✖</button>
+        <h2>🔒 Privacy Policy</h2>
+        <div
+          style="
+            text-align: left;
+            line-height: 1.6;
+            font-size: 14px;
+            max-height: 60vh;
+            overflow-y: auto;
+          "
+        >
+          <p>
+            Balloon Pop Adventure stores data only on your device using
+            localStorage (scores, coins, settings, upgrades).
+          </p>
+          <p>
+            No personal data is collected, no accounts are required, and nothing
+            is sent to any server.
+          </p>
+          <p>
+            You can clear all data anytime with the “Reset Progress” button.
+          </p>
+          <p>© 2026 Foxzoid Studio.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="game-footer">
+      <p>Balloon Pop Adventure™</p>
+      <small>Version 1.0.0 • © 2026 Foxzoid Studio. All Rights Reserved.</small>
+    </footer>
+    <audio id="bg-music" loop preload="auto">
+      <source src="assets/audio/home-music.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="click-sound" preload="auto">
+      <source src="assets/audio/sound-effects/click.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="popup-sound" preload="auto">
+      <source src="assets/audio/sound-effects/pop.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="bonus-sound" preload="auto">
+      <source src="assets/audio/sound-effects/bonus.mp3" type="audio/mpeg" />
+    </audio>
+
+    <audio id="game-over-sound" preload="auto">
+      <source
+        src="assets/audio/sound-effects/game-over.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+    <script>
+      function startGame() {
+        window.location.href = "game.html";
+      }
+    </script>
+    <script src="js/home.js"></script>
+  </body>
+</html>
