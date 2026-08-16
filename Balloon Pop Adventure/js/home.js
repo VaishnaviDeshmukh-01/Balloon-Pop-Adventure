@@ -167,6 +167,13 @@ volumeSlider.addEventListener("input", () => {
   localStorage.setItem("volume", volume);
 });
 
+document.querySelectorAll(".setting-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    playSound(clickSound);
+    vibrate(20);
+  });
+});
+
 // Reset Button
 resetBtn.addEventListener("click", () => {
   playSound(clickSound);
@@ -197,6 +204,64 @@ document.querySelectorAll(".setting-btn").forEach((button) => {
     vibrate(20);
   });
 });
+
+// How to Play
+const howtoBtn = document.getElementById("how-to-play-btn");
+const howtoModal = document.getElementById("howto-modal");
+const closeHowto = document.getElementById("close-howto");
+
+if (howtoBtn && howtoModal) {
+  howtoBtn.addEventListener("click", () => {
+    playSound(clickSound);
+    vibrate(20);
+    settingsModal.classList.remove("show");
+    howtoModal.classList.add("show");
+  });
+}
+if (closeHowto) {
+  closeHowto.addEventListener("click", () => {
+    playSound(clickSound);
+    vibrate(20);
+    howtoModal.classList.remove("show");
+  });
+}
+if (howtoModal) {
+  howtoModal.addEventListener("click", (e) => {
+    if (e.target === howtoModal) {
+      playSound(clickSound);
+      howtoModal.classList.remove("show");
+    }
+  });
+}
+
+// Privacy Policy
+const privacyBtn = document.getElementById("privacy-btn");
+const privacyModal = document.getElementById("privacy-modal");
+const closePrivacy = document.getElementById("close-privacy");
+
+if (privacyBtn && privacyModal) {
+  privacyBtn.addEventListener("click", () => {
+    playSound(clickSound);
+    vibrate(20);
+    settingsModal.classList.remove("show");
+    privacyModal.classList.add("show");
+  });
+}
+if (closePrivacy) {
+  closePrivacy.addEventListener("click", () => {
+    playSound(clickSound);
+    vibrate(20);
+    privacyModal.classList.remove("show");
+  });
+}
+if (privacyModal) {
+  privacyModal.addEventListener("click", (e) => {
+    if (e.target === privacyModal) {
+      playSound(clickSound);
+      privacyModal.classList.remove("show");
+    }
+  });
+}
 
 // Shop button (top-right, under settings)
 const shopBtnHome = document.getElementById("shop-btn-home");
